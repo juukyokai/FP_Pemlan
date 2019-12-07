@@ -18,19 +18,6 @@ struct dir{
   char owner[10]; 
 };
 typedef struct dir dir;
-/*data jenis_file;
-    jenis_file word;
-    jenis_file music;
-    jenis_file video;
-    jenis_file excel;
-    jenis_file dll;
-
-data ekstensi;
-    ekstensi exe;
-    ekstensi docx;
-    ekstensi xlsx;
-    ekstensi dll;*/
-    
     
 int main(int argc, char *argv[]){
   int i,j,k;    //loop bases
@@ -48,18 +35,6 @@ int main(int argc, char *argv[]){
   return 0;
 }
 
-void bubble_sort(int data[],int n){
-  int i,j,k;
-     for (i = 0; i < n; ++i){
-         for (j = i + 1; j < n; ++j){
-             if (data[i] > data[j]){
-                    k =  data[i];
-                    data[i] = data[j];
-                    data[j] = k;
-            }
-         }
-      }
-}
 void insert(dir data[], int n, int index_data){
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
@@ -216,35 +191,34 @@ void menu(dir data[], int n, int index_data){
   }
 }
 void bubbleSort(dir arr[], int n){  //prototype
-      int i, j, tmp;
-      for(i = 0; i < n; i++){
+        int i, j, temp_index;
+	    int tmp_int;
+	    char tmp_chr[10];
+	    double tmp_dbl;
+        for(i = 0; i < n; i++){
+      	  temp_index = i+1;
           for(j=0; j < n-i-1; j ++){
-              if(arr[j] > arr[j+1]){
-                 tmp = arr[j];
-                 arr[j] = arr[j+1];
-                 arr[j+1] = tmp;
-              }
-          }
+              if(arr[i].id > arr[j+1].id){
+              	 temp_index = 
+            }
+        }
+    	//changing id
+        tmp_int = arr[j].id;
+        arr[j] = arr[j+1];
+        arr[j+1] = tmp;
+        //changing nama
+        //changing jenis
+        //changing ekstensi
+        //changing owner
+		//changing bulan
+        //changing tahun
       }
+  	printf("ID \tNama \tJenis \tekstensi \towner \n");
+      for(i = 0; i < n; i++){
+      printf("%s \t%s \t%i \t%i \t%s", dir arr[i].id, dir arr[i].nama, dir arr[i].jenis, dir arr[i].ekstensi, dir arr[i].owner);
+ 	  	}
+ 	  	printf("\n");
 }
-/*
-                  //int main() {
-                    int array[100], n, i, j;
-                    printf("Masukkan banyak elemen: ");
-                    scanf("%d", &n);
-                    printf("Masukkan nilai: \n");
-                    for(i = 0; i < n; i++){
-                      scanf("%d", &array[i]);
-                    }
-                    bubbleSort(array, n);
-                    printf("Hasil pengurutan sebagai berikut:\n");
-                    for(i = 0; i < n; i++){
-                      printf("%d ", array[i]);
-                    }
-                    printf("\n");
-                  }
-*/
-
 
 int jumpSearch(int arr[], int x, int n) {           //prototipe belum disesuaikan dengan array of struct
                   // Finding block size to be jumped 
