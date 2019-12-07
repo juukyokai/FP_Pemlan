@@ -205,11 +205,23 @@ void bubbleSort(dir arr[], int n){  //prototype
     	//changing id
         tmp_int = arr[j].id;
         arr[j] = arr[j+1];
-        arr[j+1] = tmp;
+        arr[j+1] = tmp_int;
         //changing nama
+        tmp_chr = arr[j].nama;
+        arr[j] = arr[j+1];
+        arr[j+1] = tmp_chr;
         //changing jenis
+        tmp_int = arr[j].jenis;
+        arr[j] = arr[j+1];
+        arr[j+1] = tmp_int;
         //changing ekstensi
+        tmp_int = arr[j].ekstensi;
+        arr[j] = arr[j+1];
+        arr[j+1] = tmp_int;
         //changing owner
+        tmp_chr = arr[j].owner;
+        arr[j] = arr[j+1];
+        arr[j+1] = tmp_chr;
 		//changing bulan
         //changing tahun
       }
