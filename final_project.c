@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <conio.h>
 #include <time.h>
+
+//global variable to trace
+int index_data = 0;
+
 
 //#include <bits/stdc++.h>
 //using namespace std; 
@@ -17,32 +24,51 @@ struct dir{
   struct tanggal tanggal;
   char owner[10]; 
 };
-typedef struct dir dir;
-    
-int main(int argc, char *argv[]){
-  int i,j,k;    //loop bases
-  
-  int index_data = 0;  //tracing banyak data
-  
-  int n=10;
-  struct dir data[n];
-  insert();
-  
-  
-  
-  
-  
-  return 0;
+//typedef struct dir dir;
+/*data jenis_file;
+    jenis_file word;
+    jenis_file music;
+    jenis_file video;
+    jenis_file excel;
+    jenis_file dll;
+
+data ekstensi;
+    ekstensi exe;
+    ekstensi docx;
+    ekstensi xlsx;
+    ekstensi dll;*/
+
+int min(int a, int b){
+  if(a<b){
+    return a;
+  }else {
+    return b;
+  }
 }
 
-void insert(dir data[], int n, int index_data){
+//bubble sort char #prototype
+void bubble_sort(int data[],int n){
+  int i,j,k;
+     for (i = 0; i < n; ++i){
+         for (j = i + 1; j < n; ++j){
+             if (data[i] > data[j]){
+                    k =  data[i];
+                    data[i] = data[j];
+                    data[j] = k;
+            }
+         }
+      }
+}
+
+//Insert function
+void insert(int n, struct dir data[n]){
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
   int loop=1;
   char temp_case;
 
   //Create temp variables
-  char temp_id[3];
+  int temp_id;
   char temp_nama[10];
   int temp_jenis;
   int temp_eksten;
@@ -56,10 +82,12 @@ void insert(dir data[], int n, int index_data){
    //checking if there's sufficient space at array
    if(index_data<n){
      //Setting ID
-
+   temp_id = index_data+1;
      //input nama
      printf("masukkan nama file : \n");
-     printf("Input : ");scanf("%s",&temp_nama);
+     printf("Input : ");
+     fflush(stdin);
+   scanf("%s",&temp_nama);
      //input jenis
      printf("masukkan Jenis file : \n");
      printf("\t1. Word\n");
@@ -67,10 +95,14 @@ void insert(dir data[], int n, int index_data){
      printf("\t3. Music\n");
      printf("\t4. Video\n");
      printf("\t5. PDF\n");
-     printf("Input : ");scanf("%d",&temp_jenis);
-     temp_jenis = temp_eksten;
+   fflush(stdin);
+     printf("Input : ");
+   scanf("%d",&temp_jenis);
+     temp_eksten = temp_jenis;
+     //printf("%d %d \n",temp_jenis,temp_eksten);
      //input owner
      printf("masukkan owner file : ");
+     fflush(stdin);
      scanf("%s",&temp_owner);  
     }
     else{
@@ -78,18 +110,28 @@ void insert(dir data[], int n, int index_data){
     }
    //saving data to real structure
    printf("Apakah anda yakin dengan data yang telah anda input? (y/n)\n");
+   fflush(stdin);
    scanf("%c",&temp_case);
    if(temp_case == 'y' || temp_case == 'Y'){
-     data[index_data].id = index_data+1;
+    //id
+     data[index_data].id = temp_id;
+     printf("id :%d\n",temp_id);
+     //nama
      strcpy(data[index_data].nama,temp_nama);
+     //jenis
      data[index_data].jenis = temp_jenis;
+     //ekstensi
      data[index_data].ekstensi = temp_eksten;
+     //printf("%d %d ",data[index_data].jenis,data[index_data].ekstensi);
+     //tanggal
      data[index_data].tanggal.tanggal = temp_tgl;
      data[index_data].tanggal.bulan = temp_bulan;
      data[index_data].tanggal.tahun = temp_tahun;
+     //owner
      strcpy(data[index_data].owner,temp_owner);
      index_data++;
      loop=0;
+     getch();
    }else if(temp_case == 'n' || temp_case == 'n'){
      printf("ulangi input? (y/n)");
      scanf("%c",&temp_case);
@@ -105,59 +147,112 @@ void insert(dir data[], int n, int index_data){
   }
 }
 
-//view function
-void view(dir data[], int n, int index_data){
-  int i,j;
+//view all
+void view_all(struct dir data[]){
+  int i;
   for(i=0;i<index_data;i++){
-    printf("%d. %s",(i+1),data[i].nama);
+    printf("%d. %s ",(i+1),data[i].nama);
     switch(data[i].ekstensi){
       case 1:
-        printf(".docx\n");
+        printf(".docx");
         break;
       case 2:
-        printf(".xlsx\n");
+        printf(".xlsx");
         break;
       case 3:
-        printf(".mp3\n");
+        printf(".mp3");
         break;
       case 4:
-        printf(".mp4\n");
+        printf(".mp4");
         break;
       case 5:
-        printf(".pdf\n");
+        printf(".pdf");
         break;
       default:
         printf("Invalid Input");
         break;    
     }
+    printf(" (id : %d)\n",data[i].id);
     switch(data[i].jenis){
       case 1:
-        printf("\t Word File\n");
+        printf("\tWord File\n");
         break;
       case 2:
-        printf("\t Excel File\n");
+        printf("\tExcel File\n");
         break;
       case 3:
-        printf("\t Music File\n");
+        printf("\tMusic File\n");
         break;
       case 4:
-        printf("\t Video File\n");
+        printf("\tVideo File\n");
         break;
       case 5:
-        printf("\t PDF File\n");
+        printf("\tPDF File\n");
         break;
       default:
         printf("Invalid Input");
         break;    
     }
-    printf("%d");
+    printf("\tLast Modified : %d-%d-%d",data[i].tanggal.tanggal,data[i].tanggal.bulan,data[i].tanggal.tahun);
+    printf(" By %s",data[i].owner);
+    printf("\n");
   }
-  
+  getch();
+}
+
+//view specifics
+void view(struct dir data){
+  printf("* %s ",data.nama);
+    switch(data.ekstensi){
+      case 1:
+        printf(".docx");
+        break;
+      case 2:
+        printf(".xlsx");
+        break;
+      case 3:
+        printf(".mp3");
+        break;
+      case 4:
+        printf(".mp4");
+        break;
+      case 5:
+        printf(".pdf");
+        break;
+      default:
+        printf("Invalid Input");
+        break;    
+    }
+    printf(" (id : %d)\n",data.id);
+    switch(data.jenis){
+      case 1:
+        printf("\tWord File\n");
+        break;
+      case 2:
+        printf("\tExcel File\n");
+        break;
+      case 3:
+        printf("\tMusic File\n");
+        break;
+      case 4:
+        printf("\tVideo File\n");
+        break;
+      case 5:
+        printf("\tPDF File\n");
+        break;
+      default:
+        printf("Invalid Input");
+        break;    
+    }
+    printf("\tLast Modified : %d-%d-%d",data.tanggal.tanggal,data.tanggal.bulan,data.tanggal.tahun);
+    printf(" By %s",data.owner);
+    printf("\n");
 }
 
 //main menu
-void menu(dir data[], int n, int index_data){
-  int input;
+void menu(struct dir data[], int n){
+  int cari,cari_index;
+  char input;
   int loop_menu=1;
   while(loop_menu==1){
     system("cls");
@@ -168,105 +263,128 @@ void menu(dir data[], int n, int index_data){
     printf("3. Search file in Directory\n");
     printf("4. Sort file in Directory\n");
     printf("press 'q' to exit\n");
-    scanf("%c",&input);
+    fflush(stdin);
+  scanf("%c",&input);
     //switch-case
-    switch(input){
-      case '1': // insert
-          insert(data,n,index_data);
-      break;
-      case '2': //view
-          view(data,n,index_data);
-      break;
-      case '3': //search
-          jumpSearch();
-      break;
-      case '4': //sort
-          bubbleSort();
-      break;
-      case 'q':
-        loop_menu=0;
-        break;
-    }
-    
+    if(input == '1'){
+      insert(n,data);
+  }else if(input == '2'){
+    view_all(data);
+  }else if(input == '3'){
+    printf("masukkan data yang ingin dicari : ");
+    fflush(stdin);
+    scanf("%d",&cari);
+    cari_index = jumpSearch(data,cari,n);
+    view(data[cari_index]);
+  }else if(input == '4'){
+    bubbleSort_int(data,n);
+  }else if(input == 'q'){
+    trims();
+    loop_menu=0;
+  }else{
+    printf("input tidak valid");
+  }
   }
 }
-void bubbleSort(dir arr[], int n){  //prototype
-        int i, j, temp_index;
-	    int tmp_int;
-	    char tmp_chr[10];
-	    double tmp_dbl;
-        for(i = 0; i < n; i++){
-      	  temp_index = i+1;
-          for(j=0; j < n-i-1; j ++){
-              if(arr[i].id > arr[j+1].id){
-              	 temp_index = 
-            }
-        }
-    	//changing id
-        tmp_int = arr[j].id;
-        arr[j] = arr[j+1];
-        arr[j+1] = tmp_int;
+
+//bubble sort
+void bubbleSort_int(struct dir arr[], int n){  //prototype
+      int i, j, tmp_index;
+    int tmp_int;
+    char tmp_chr[10];
+      for(i = 0; i < index_data ; i++){
+          tmp_index = i+1;
+          for(j=i+1; j < index_data; j ++){
+              if(arr[i].id > arr[j].id){
+                 tmp_index = j;
+              }
+          }
+        //After looking for index of the smallest
+      //changing id
+        tmp_int = arr[i].id;
+        arr[i].id = arr[tmp_index].id;
+        arr[tmp_index].id = tmp_int;
         //changing nama
-        tmp_chr = arr[j].nama;
-        arr[j] = arr[j+1];
-        arr[j+1] = tmp_chr;
+        strcpy(tmp_chr,arr[i].nama);
+        strcpy(arr[i].nama,arr[tmp_index].nama);
+        strcpy(arr[tmp_index].nama,tmp_chr);
         //changing jenis
-        tmp_int = arr[j].jenis;
-        arr[j] = arr[j+1];
-        arr[j+1] = tmp_int;
+        tmp_int = arr[i].jenis;
+        arr[i].jenis = arr[tmp_index].jenis;
+        arr[tmp_index].jenis = tmp_int;
         //changing ekstensi
-        tmp_int = arr[j].ekstensi;
-        arr[j] = arr[j+1];
-        arr[j+1] = tmp_int;
-        //changing owner
-        tmp_chr = arr[j].owner;
-        arr[j] = arr[j+1];
-        arr[j+1] = tmp_chr;
-		//changing bulan
+        tmp_int = arr[i].ekstensi;
+        arr[i].ekstensi = arr[tmp_index].ekstensi;
+        arr[tmp_index].ekstensi = tmp_int;
+        //changing tanggal
+        tmp_int = arr[i].tanggal.tanggal;
+        arr[i].tanggal.tanggal = arr[tmp_index].tanggal.tanggal;
+        arr[tmp_index].tanggal.tanggal = tmp_int;
+        //changing bulan
+        tmp_int = arr[i].tanggal.bulan;
+        arr[i].tanggal.bulan = arr[tmp_index].tanggal.bulan;
+        arr[tmp_index].tanggal.bulan = tmp_int;
         //changing tahun
-      }
-  	printf("ID \tNama \tJenis \tekstensi \towner \n");
-      for(i = 0; i < n; i++){
-      printf("%s \t%s \t%i \t%i \t%s", dir arr[i].id, dir arr[i].nama, dir arr[i].jenis, dir arr[i].ekstensi, dir arr[i].owner);
- 	  	}
- 	  	printf("\n");
+        tmp_int = arr[i].tanggal.tahun;
+        arr[i].tanggal.tahun = arr[tmp_index].tanggal.tahun;
+        arr[tmp_index].tanggal.tahun = tmp_int;
+        //changing owner
+        strcpy(tmp_chr      , arr[i].owner);
+        strcpy(arr[i].owner     , arr[tmp_index].owner);
+        strcpy(arr[tmp_index].owner,  tmp_chr);
+      } 
+}
+/*
+                  //int main() {
+                    int array[100], n, i, j;
+                    printf("Masukkan banyak elemen: ");
+                    scanf("%d", &n);
+                    printf("Masukkan nilai: \n");
+                    for(i = 0; i < n; i++){
+                      scanf("%d", &array[i]);
+                    }
+                    bubbleSort(array, n);
+                    printf("Hasil pengurutan sebagai berikut:\n");
+                    for(i = 0; i < n; i++){
+                      printf("%d ", array[i]);
+                    }
+                    printf("\n");
+                  }
+*/
+
+//Jump Search
+int jumpSearch(int n, int x, struct dir arr[]) {           //prototipe belum disesuaikan dengan array of struct
+    // Finding block size to be jumped 
+    int step = sqrt(index_data) ;
+      
+    // Finding the block where element is 
+    // present (if it is present) 
+    int prev = 0; 
+    while (arr[min(step, index_data)-1].id < x){ 
+            prev = step; 
+            step += sqrt(index_data); 
+            if (prev >= index_data) 
+                return -1; 
+    }
+    // Doing a linear search for x in block 
+    // beginning with prev. 
+    while (arr[prev].id < x) {
+        prev++; 
+        // If we reached next block or end of 
+        // array, element is not present. 
+        if (prev == min(step, index_data)){
+       return -1; 
+    }
+    } 
+    // If element is found 
+    if (arr[prev].id == x){
+      return prev; 
+  }
+    return -1; 
 }
 
-int jumpSearch(int arr[], int x, int n) {           //prototipe belum disesuaikan dengan array of struct
-                  // Finding block size to be jumped 
-                  int step = sqrt(n); 
-
-                  // Finding the block where element is 
-                  // present (if it is present) 
-                  int prev = 0; 
-                  while (arr[min(step, n)-1] < x) 
-                  { 
-                      prev = step; 
-                      step += sqrt(n); 
-                      if (prev >= n) 
-                          return -1; 
-                  } 
-
-                  // Doing a linear search for x in block 
-                  // beginning with prev. 
-                  while (arr[prev] < x) 
-                  { 
-                      prev++; 
-
-                      // If we reached next block or end of 
-                      // array, element is not present. 
-                      if (prev == min(step, n)) 
-                          return -1; 
-                  } 
-                  // If element is found 
-                  if (arr[prev] == x) 
-                      return prev; 
-
-                  return -1; 
-              } 
-
-              // Driver program to test function 
-              //int main() 
+// Driver program to test function 
+ /*             //int main() 
               { 
                   int arr[] = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 
                               34, 55, 89, 144, 233, 377, 610 };//data 
@@ -281,4 +399,23 @@ int jumpSearch(int arr[], int x, int n) {           //prototipe belum disesuaika
                   return 0; 
               } 
 
+*/
+void trims(){
+  system("cls");
+  printf("Makasih !!");
+}
 
+int main(int argc, char *argv[]){
+  int i,j,k;    //loop bases
+  
+  
+  int n=10;
+  struct dir data[n];
+  menu(data,n);
+  printf("%d",index_data);
+  
+  
+  
+  
+  return 0;
+}
