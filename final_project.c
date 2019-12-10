@@ -46,18 +46,28 @@ int min(int a, int b){
   }
 }
 
-//bubble sort char #prototype
-void bubble_sort(int data[],int n){
-  int i,j,k;
-     for (i = 0; i < n; ++i){
-         for (j = i + 1; j < n; ++j){
-             if (data[i] > data[j]){
-                    k =  data[i];
-                    data[i] = data[j];
-                    data[j] = k;
-            }
-         }
-      }
+int max(int a, int b){
+	if(a>b){
+		return a;
+	}else {
+		return b;
+	}
+}
+
+//tukar int
+void tukar_int(int a, int b){
+	int temp;
+	temp=a;
+	a=b;
+	b=temp;
+}
+
+//tukar string
+void tukar_str(char a[], char b[]){
+	char temp[124];
+	strcpy(temp,a);
+	strcpy(a,b);
+	strcpy(b,temp);
 }
 
 //Insert function
@@ -267,92 +277,207 @@ void menu(struct dir data[], int n){
     printf("\n\t\t\t\t\t\t\t\t\t\tPress 'q' to Exit\n");
     fflush(stdin);
   scanf("%c",&input);
-    //switch-case
+       //switch-case
     if(input == '1'){
-      insert(n,data);
-  }else if(input == '2'){
-    view_all(data);
-  }else if(input == '3'){
-    printf(" Masukkan data yang ingin dicari : ");
-    fflush(stdin);
-    scanf("%d",&cari);
-    cari_index = jumpSearch(data,cari,n);
-    view(data[cari_index]);
-  }else if(input == '4'){
-    bubbleSort_int(data,n);
-  }else if(input == 'q'){
-    trims();
-    loop_menu=0;
-  }else{
-    printf(" Input Tidak Valid");
-  }
+    	insert(n,data);
+	}else if(input == '2'){
+		if(index_data == 0){
+			printf("data masih kosong !!");
+			getch();
+		}else {
+			view_all(data);
+		}
+	}else if(input == '3'){
+		if(index_data == 0){
+			printf("data masih kosong !!");
+			getch();
+		}else {
+			printf("masukkan data yang ingin dicari : ");
+			scanf("%d",&cari);
+			fflush(stdin);
+			cari_index = jumpSearch_int(n,cari,data);
+			printf("%d\n",cari_index);
+			view(data[cari_index]);
+			getch();
+		}
+	}else if(input == '4'){
+		printf("Mau sort berdasarkan ID atau nama? (1 / 2)\n");
+		scanf("%d",&pil);
+		printf("Mau ascending apa descending? (1 / 2)\n");
+		scanf("%d",&pil1);
+		//pilih jenis sort
+		switch(pil){
+			case 1:
+				bubbleSort_int(data,n,pil1);
+			break;
+			case 2:
+				bubbleSort_char(data,n,pil1);
+			break;	
+		}
+	}else if(input == 'q'){
+		trims();
+		loop_menu=0;
+	}else{
+		printf("input tidak valid");
+	}
   }
 }
 
-//bubble sort
-void bubbleSort_int(struct dir arr[], int n){  //prototype
-    int i, j, tmp_index;
-    int tmp_int;
-    char tmp_chr[10];
-      for(i = 0; i < index_data ; i++){
-          for(j=i+1; j < index_data; j ++){
-              if(arr[i].id > arr[j].id){
-        //changing id
-        tmp_int = arr[j].id;
-        arr[j].id = arr[j+1].id;
-        arr[j+1].id = tmp_int;
-        //changing nama
-        strcpy(tmp_chr,arr[j].nama);
-        strcpy(arr[j].nama,arr[j+1].nama);
-        strcpy(arr[j+1].nama,tmp_chr);
-        //changing jenis
-        tmp_int = arr[j].jenis;
-        arr[j].jenis = arr[j+1].jenis;
-        arr[j+1].jenis = tmp_int;
-        //changing ekstensi
-        tmp_int = arr[j].ekstensi;
-        arr[j].ekstensi = arr[j+1].ekstensi;
-        arr[j+1].ekstensi = tmp_int;
-        //changing tanggal
-        tmp_int = arr[j].tanggal.tanggal;
-        arr[j].tanggal.tanggal = arr[j+1].tanggal.tanggal;
-        arr[j+1].tanggal.tanggal = tmp_int;
-        //changing bulan
-        tmp_int = arr[j].tanggal.bulan;
-        arr[j].tanggal.bulan = arr[j+1].tanggal.bulan;
-        arr[j+1].tanggal.bulan = tmp_int;
-        //changing tahun
-        tmp_int = arr[j].tanggal.tahun;
-        arr[j].tanggal.tahun = arr[j+1].tanggal.tahun;
-        arr[j+1].tanggal.tahun = tmp_int;
-        //changing owner
-        strcpy(tmp_chr      , arr[j].owner);
-        strcpy(arr[j].owner     , arr[j+1].owner);
-        strcpy(arr[j+1].owner,  tmp_chr);
-              }
-          }
-        //After looking for index of the smallest
-
-      } 
+//bubble sort char
+void bubbleSort_char(struct dir arr[],int n,int pil){
+	int i,j;
+    /* sorts the string */
+    printf("%d",pil);
+	switch(pil){
+		case 1: //ascending
+		for (i = 0; i < index_data-1 ; i++) {
+	        for (j = 0; j < index_data-i-1 ; j++){
+				if (strcmp(arr[j].nama,arr[j+1].nama) > 0){
+		            //After looking for index of the smallest
+			    	//changing id
+			    	printf("before : %d - %d\n",arr[j].id,arr[j+1].id);
+			    	tukar_int(arr[j].id,arr[j+1].id);
+			    	printf("after : %d - %d\n",arr[j].id,arr[j+1].id);
+			        //changing nama
+			        tukar_str(arr[j].nama,arr[j+1].nama);
+			        //changing jenis
+			        tukar_int(arr[j].jenis,arr[j+1].jenis);
+			        //changing ekstensi
+			        tukar_int(arr[j].ekstensi,arr[j+1].ekstensi);
+			        //changing tanggal
+			        tukar_int(arr[j].tanggal.tanggal,arr[j+1].tanggal.tanggal);
+			        //changing bulan
+			        tukar_int(arr[j].tanggal.bulan,arr[j+1].tanggal.bulan);
+			        //changing tahun
+			        tukar_int(arr[j].tanggal.tahun,arr[j+1].tanggal.tahun);
+			        //changing owner
+			        tukar_str(arr[j].owner,arr[j+1].owner);
+			    }
+			}
+		}
+			break;
+		case 2: //descending
+		for (i = 0; i < index_data-1 ; i++) {
+	        for (j = 0; j < index_data-i-1 ; j++){
+	        	if (strcmp(arr[j].nama,arr[j+1].nama) < 0){
+		            //After looking for index of the smallest
+			    	//changing id
+			    	printf("before : %d - %d\n",arr[j].id,arr[j+1].id);
+			    	tukar_int(arr[j].id,arr[j+1].id);
+			    	printf("after : %d - %d\n",arr[j].id,arr[j+1].id);
+			        //changing nama
+			        tukar_str(arr[j].nama,arr[j+1].nama);
+			        //changing jenis
+			        tukar_int(arr[j].jenis,arr[j+1].jenis);
+			        //changing ekstensi
+			        tukar_int(arr[j].ekstensi,arr[j+1].ekstensi);
+			        //changing tanggal
+			        tukar_int(arr[j].tanggal.tanggal,arr[j+1].tanggal.tanggal);
+			        //changing bulan
+			        tukar_int(arr[j].tanggal.bulan,arr[j+1].tanggal.bulan);
+			        //changing tahun
+			        tukar_int(arr[j].tanggal.tahun,arr[j+1].tanggal.tahun);
+			        //changing owner
+			        tukar_str(arr[j].owner,arr[j+1].owner);
+			    }
+			}
+		}
+			break;   
+    }
+    getch();
 }
-/*
-                  //int main() {
-                    int array[100], n, i, j;
-                    printf("Masukkan banyak elemen: ");
-                    scanf("%d", &n);
-                    printf("Masukkan nilai: \n");
-                    for(i = 0; i < n; i++){
-                      scanf("%d", &array[i]);
-                    }
-                    bubbleSort(array, n);
-                    printf("Hasil pengurutan sebagai berikut:\n");
-                    for(i = 0; i < n; i++){
-                      printf("%d ", array[i]);
-                    }
-                    printf("\n");
-                  }
-*/
 
+//bubble sort int 1 - digit
+void bubbleSort_int(struct dir arr[], int n,int pil){
+      int i, j;
+	  int tmp_int;
+	  char tmp_chr[10];
+	  switch(pil){
+	  	case 1:
+	  		for(i = 0; i < index_data-1 ; i++){
+	          for(j=0 ; j < index_data-i-1 ; j ++){
+	              if(arr[j].id > arr[j+1].id){
+	              	//After looking for index of the smallest
+			    	//changing id
+			        tmp_int = arr[j].id;
+			        arr[j].id = arr[j+1].id;
+			        arr[j+1].id = tmp_int;
+			        //changing nama
+			        strcpy(tmp_chr,arr[j].nama);
+			        strcpy(arr[j].nama,arr[j+1].nama);
+			        strcpy(arr[j+1].nama,tmp_chr);
+			        //changing jenis
+			        tmp_int = arr[j].jenis;
+			        arr[j].jenis = arr[j+1].jenis;
+			        arr[j+1].jenis = tmp_int;
+			        //changing ekstensi
+			        tmp_int = arr[j].ekstensi;
+			        arr[j].ekstensi = arr[j+1].ekstensi;
+			        arr[j+1].ekstensi = tmp_int;
+			        //changing tanggal
+			        tmp_int = arr[j].tanggal.tanggal;
+			        arr[j].tanggal.tanggal = arr[j+1].tanggal.tanggal;
+			        arr[j+1].tanggal.tanggal = tmp_int;
+			        //changing bulan
+			        tmp_int = arr[j].tanggal.bulan;
+			        arr[j].tanggal.bulan = arr[j+1].tanggal.bulan;
+			        arr[j+1].tanggal.bulan = tmp_int;
+			        //changing tahun
+			        tmp_int = arr[j].tanggal.tahun;
+			        arr[j].tanggal.tahun = arr[j+1].tanggal.tahun;
+			        arr[j+1].tanggal.tahun = tmp_int;
+			        //changing owner
+			        strcpy(tmp_chr			,	arr[j].owner);
+			        strcpy(arr[j].owner			,	arr[j+1].owner);
+			        strcpy(arr[j+1].owner,	tmp_chr);
+	              }
+	          }
+	      }
+	  		break;
+	  	case 2:
+	  		for(i = 0; i < index_data-1 ; i++){
+	          for(j=0 ; j < index_data-i-1 ; j ++){
+	              if(arr[j].id < arr[j+1].id){
+	              	//After looking for index of the smallest
+			    	//changing id
+			        tmp_int = arr[j].id;
+			        arr[j].id = arr[j+1].id;
+			        arr[j+1].id = tmp_int;
+			        //changing nama
+			        strcpy(tmp_chr,arr[j].nama);
+			        strcpy(arr[j].nama,arr[j+1].nama);
+			        strcpy(arr[j+1].nama,tmp_chr);
+			        //changing jenis
+			        tmp_int = arr[j].jenis;
+			        arr[j].jenis = arr[j+1].jenis;
+			        arr[j+1].jenis = tmp_int;
+			        //changing ekstensi
+			        tmp_int = arr[j].ekstensi;
+			        arr[j].ekstensi = arr[j+1].ekstensi;
+			        arr[j+1].ekstensi = tmp_int;
+			        //changing tanggal
+			        tmp_int = arr[j].tanggal.tanggal;
+			        arr[j].tanggal.tanggal = arr[j+1].tanggal.tanggal;
+			        arr[j+1].tanggal.tanggal = tmp_int;
+			        //changing bulan
+			        tmp_int = arr[j].tanggal.bulan;
+			        arr[j].tanggal.bulan = arr[j+1].tanggal.bulan;
+			        arr[j+1].tanggal.bulan = tmp_int;
+			        //changing tahun
+			        tmp_int = arr[j].tanggal.tahun;
+			        arr[j].tanggal.tahun = arr[j+1].tanggal.tahun;
+			        arr[j+1].tanggal.tahun = tmp_int;
+			        //changing owner
+			        strcpy(tmp_chr			,	arr[j].owner);
+			        strcpy(arr[j].owner			,	arr[j+1].owner);
+			        strcpy(arr[j+1].owner,	tmp_chr);
+	              }
+	          }
+	      }
+	  		break;
+	  }
+      
+}
 //Jump Search
 int jumpSearch(int n, int x, struct dir arr[]) {           //prototipe belum disesuaikan dengan array of struct
     // Menemukan ukuran blok untuk dilompati 
@@ -382,29 +507,41 @@ int jumpSearch(int n, int x, struct dir arr[]) {           //prototipe belum dis
     if (arr[prev].id == x){
       return prev;
   	}
-  	//nama
-	while (arr[min(step, index_data)-1].nama < x){
-            prev = step;
-            step += sqrt(index_data);
+  	
+    return -1;
+}
+
+//Jump Search
+int jumpSearch_char(int n, int x, struct dir arr[]) {           
+    // Finding block size to be jumped 
+    int step = sqrt(index_data) ;
+			
+    // Finding the block where element is 
+    // present (if it is present) 
+    int prev = 0; 
+    while (arr[min(step, index_data)-1].id < x){ 
+            prev = step; 
+            step += sqrt(index_data); 
             if (prev >= index_data) 
-                return -1;
+                return -1; 
     }
-    // Melakukan pencarian untuk data didalam blok
-    // dimulai dari prev. 
-    while (arr[prev].nama < x) {
-        prev++;
+    // Doing a linear search for x in block 
+    // beginning with prev. 
+    while (arr[prev].id < x) {
+        prev++; 
         // If we reached next block or end of 
         // array, element is not present. 
         if (prev == min(step, index_data)){
-       return -1;
-    	}
-    }
-    // Jika elemen ditemukan 
-    if (arr[prev].nama == x){
-      return prev;
-  }
-    return -1;
+		   return -1; 
+		}
+    } 
+    // If element is found 
+    if (arr[prev].id == x){
+    	return prev; 
+	}
+    return -1; 
 }
+
 
 // Driver program to test function 
  /*             //int main() 
@@ -430,7 +567,6 @@ void trims(){
 
 int main(int argc, char *argv[]){
   int i,j,k;    //loop bases
-  
   
   int n=10;
   struct dir data[n];
