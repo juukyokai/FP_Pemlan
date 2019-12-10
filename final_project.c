@@ -261,7 +261,7 @@ void view(struct dir data){
 
 //main menu
 void menu(struct dir data[], int n){
-  int cari,cari_index;
+  int cari,cari_index,pil,pil1;
   char input;
   int loop_menu=1;
   while(loop_menu==1){
@@ -451,6 +451,88 @@ void bubbleSort_int(struct dir arr[], int n,int pil){
 			        tmp_int = arr[j].jenis;
 			        arr[j].jenis = arr[j+1].jenis;
 			        arr[j+1].jenis = tmp_int;
+			        //changing ekstensi
+			        tmp_int = arr[j].ekstensi;
+			        arr[j].ekstensi = arr[j+1].ekstensi;
+			        arr[j+1].ekstensi = tmp_int;
+			        //changing tanggal
+			        tmp_int = arr[j].tanggal.tanggal;
+			        arr[j].tanggal.tanggal = arr[j+1].tanggal.tanggal;
+			        arr[j+1].tanggal.tanggal = tmp_int;
+			        //changing bulan
+			        tmp_int = arr[j].tanggal.bulan;
+			        arr[j].tanggal.bulan = arr[j+1].tanggal.bulan;
+			        arr[j+1].tanggal.bulan = tmp_int;
+			        //changing tahun
+			        tmp_int = arr[j].tanggal.tahun;
+			        arr[j].tanggal.tahun = arr[j+1].tanggal.tahun;
+			        arr[j+1].tanggal.tahun = tmp_int;
+			        //changing owner
+			        strcpy(tmp_chr			,	arr[j].owner);
+			        strcpy(arr[j].owner			,	arr[j+1].owner);
+			        strcpy(arr[j+1].owner,	tmp_chr);
+	              }
+	          }
+	      }
+	  		break;
+	  		case 3:
+	  		for(i = 0; i < index_data-1 ; i++){
+	          for(j=0 ; j < index_data-i-1 ; j ++){
+	              if(arr[j].jenis < arr[j+1].jenis){
+	              	//After looking for index of the smallest
+			    	//changing jenis
+			        tmp_int = arr[j].jenis;
+			        arr[j].jenis = arr[j+1].jenis;
+			        arr[j+1].jenis = tmp_int;
+					//changing id
+			        tmp_int = arr[j].id;
+			        arr[j].id = arr[j+1].id;
+			        arr[j+1].id = tmp_int;
+			        //changing nama
+			        strcpy(tmp_chr,arr[j].nama);
+			        strcpy(arr[j].nama,arr[j+1].nama);
+			        strcpy(arr[j+1].nama,tmp_chr);
+			        //changing ekstensi
+			        tmp_int = arr[j].ekstensi;
+			        arr[j].ekstensi = arr[j+1].ekstensi;
+			        arr[j+1].ekstensi = tmp_int;
+			        //changing tanggal
+			        tmp_int = arr[j].tanggal.tanggal;
+			        arr[j].tanggal.tanggal = arr[j+1].tanggal.tanggal;
+			        arr[j+1].tanggal.tanggal = tmp_int;
+			        //changing bulan
+			        tmp_int = arr[j].tanggal.bulan;
+			        arr[j].tanggal.bulan = arr[j+1].tanggal.bulan;
+			        arr[j+1].tanggal.bulan = tmp_int;
+			        //changing tahun
+			        tmp_int = arr[j].tanggal.tahun;
+			        arr[j].tanggal.tahun = arr[j+1].tanggal.tahun;
+			        arr[j+1].tanggal.tahun = tmp_int;
+			        //changing owner
+			        strcpy(tmp_chr			,	arr[j].owner);
+			        strcpy(arr[j].owner			,	arr[j+1].owner);
+			        strcpy(arr[j+1].owner,	tmp_chr);
+	              }
+	          }
+	      }
+	  		break;
+	  		case 4:
+	  		for(i = 0; i < index_data-1 ; i++){
+	          for(j=0 ; j < index_data-i-1 ; j ++){
+	              if(arr[j].ekstensi < arr[j+1].ekstensi){
+	              	//After looking for index of the smallest
+			    	//changing jenis
+			        tmp_int = arr[j].jenis;
+			        arr[j].jenis = arr[j+1].jenis;
+			        arr[j+1].jenis = tmp_int;
+					//changing id
+			        tmp_int = arr[j].id;
+			        arr[j].id = arr[j+1].id;
+			        arr[j+1].id = tmp_int;
+			        //changing nama
+			        strcpy(tmp_chr,arr[j].nama);
+			        strcpy(arr[j].nama,arr[j+1].nama);
+			        strcpy(arr[j+1].nama,tmp_chr);
 			        //changing ekstensi
 			        tmp_int = arr[j].ekstensi;
 			        arr[j].ekstensi = arr[j+1].ekstensi;
