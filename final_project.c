@@ -22,25 +22,31 @@ struct dir{
   int jenis;
   int ekstensi;
   struct tanggal tanggal;
-  char owner[128]; 
+  char owner[128];
+  int status;
 };
 //typedef struct dir dir;
 /*data jenis_file;
     jenis_file word;
+    jenis_file excel;
     jenis_file music;
     jenis_file video;
-    jenis_file excel;
-    jenis_file dll;
+    jenis_file pdf;
 
 data ekstensi;
-    ekstensi exe;
     ekstensi docx;
     ekstensi xlsx;
-    ekstensi dll;*/
+    ekstensi mp3;
+    ekstensi mp4;
+    ekstensi pdf;
     
-    
-    
-    
+data status
+  0 - off
+  1 - active
+  */
+
+
+
 /*fungsi pembanding*/
 int min(int a, int b){
   if(a<b){
@@ -119,24 +125,31 @@ void insert(int n, struct dir data[n]){
      //Setting ID
    temp_id = index_data+1;
      //input nama
-     printf("masukkan nama file : \n");
-     printf("Input : ");
+     printf("\n\n\n\t\t\t\t\t ______________________\n");
+     printf("\t\t\t\t\t| Masukkan Nama file : |\n");
+     printf("\t\t\t\t\t|______________________|\n");
+     printf("\t\t\t\t\tInput : ");
      fflush(stdin);
    scanf("%[^\n]",&temp_nama);
      //input jenis
-     printf("masukkan Jenis file : \n");
-     printf("\t1. Word\n");
-     printf("\t2. Excel\n");
-     printf("\t3. Music\n");
-     printf("\t4. Video\n");
-     printf("\t5. PDF\n");
+     printf("\n\t\t\t\t\t _______________________\n");
+     printf("\t\t\t\t\t| Masukkan Jenis file : |\n");
+     printf("\t\t\t\t\t| \t1. Word         |\n");
+     printf("\t\t\t\t\t| \t2. Excel        |\n");
+     printf("\t\t\t\t\t| \t3. Music        |\n");
+     printf("\t\t\t\t\t| \t4. Video        |\n");
+     printf("\t\t\t\t\t| \t5. PDF          |\n");
+     printf("\t\t\t\t\t|_______________________|\n");
    fflush(stdin);
-     printf("Input : ");
+     printf("\t\t\t\t\tInput : ");
    scanf("%d",&temp_jenis);
      temp_eksten = temp_jenis;
      //printf("%d %d \n",temp_jenis,temp_eksten);
      //input owner
-     printf("masukkan owner file : ");
+     printf("\n\t\t\t\t\t _______________________\n");
+     printf("\t\t\t\t\t| Masukkan owner file : |\n");
+     printf("\t\t\t\t\t|_______________________|\n");
+     printf("\t\t\t\t\tInput : ");
      fflush(stdin);
      scanf("%[^\n]",&temp_owner);  
     }
@@ -144,7 +157,8 @@ void insert(int n, struct dir data[n]){
      printf("Maaf data penuh :'('");
     }
    //saving data to real structure
-   printf("Apakah anda yakin dengan data yang telah anda input? (y/n)\n");
+   printf("\n\t\t\t\t\tApakah anda yakin? (y/n)\n");
+   printf("\t\t\t\t\tInput : ");
    fflush(stdin);
    scanf("%c",&temp_case);
    if(temp_case == 'y' || temp_case == 'Y'){
@@ -163,11 +177,13 @@ void insert(int n, struct dir data[n]){
      data[index_data].tanggal.tahun = temp_tahun;
      //owner
      strcpy(data[index_data].owner,temp_owner);
+     data[index_data].status = 1;
      index_data++;
      loop=0;
      getch();
    }else if(temp_case == 'n' || temp_case == 'n'){
      printf("ulangi input? (y/n)");
+     fflush(stdin);
      scanf("%c",&temp_case);
      if (temp_case == 'y' || temp_case == 'Y'){
        loop=1;
@@ -181,55 +197,141 @@ void insert(int n, struct dir data[n]){
   }
 }
 
+//update
+int update(struct dir data[], int cari_index){
+  printf("masuk fungsi!");
+  char input,input1;
+  char temp_nama[128];
+  int temp_int;
+    system("cls");
+    printf("Bagian mana yang ingin anda ubah?\n");
+    printf("\t1. Nama\n\t2. Jenis\n\t3. owner\n tekan q untuk keluar");
+    printf("Input : ");
+    fflush(stdin);
+    scanf("%c",&input);
+    if(input == '1'){
+      printf("Masukkan nama : ");
+      fflush(stdin);
+      scanf("%[^\n]",&temp_nama);
+      printf("Apakah anda yakin? (y/n)");
+      fflush(stdin);
+      scanf("%c",&input1);
+      if(input1 == 'y' || input1 == 'Y'){
+        strcpy(data[cari_index].nama,temp_nama);
+      }else if(input1 == 'n' || input1 == 'N'){
+        strcpy(data[cari_index].nama,data[cari_index].nama);
+      }else {
+        printf("Invalid Input");
+      }
+    }else if(input == '2'){
+      printf("masukkan Jenis file : \n");
+        printf("\t1. Word\n");
+        printf("\t2. Excel\n");
+        printf("\t3. Music\n");
+        printf("\t4. Video\n");
+        printf("\t5. PDF\n");
+        printf("Input : ");
+      fflush(stdin);
+      scanf("%d",&temp_int);
+        printf("Apakah anda yakin? (y/n)");
+        fflush(stdin);
+        scanf("%c",&input1);
+      if(input1 == 'y' || input1 == 'Y'){
+        data[cari_index].jenis = temp_int;
+        data[cari_index].ekstensi = temp_int;
+      }else if(input1 == 'n' || input1 == 'N'){
+        data[cari_index].jenis = data[cari_index].jenis;
+        data[cari_index].ekstensi = data[cari_index].ekstensi;
+      }else {
+        printf("Invalid Input");
+      }
+    }else if(input == '3'){
+      printf("Masukkan nama : ");
+      fflush(stdin);
+      scanf("%[^\n]",&temp_nama);
+      printf("Apakah anda yakin? (y/n)");
+      fflush(stdin);
+      scanf("%c",&input1);
+      if(input1 == 'y' || input1 == 'Y'){
+        strcpy(data[cari_index].nama,temp_nama);
+      }else if(input1 == 'n' || input1 == 'N'){
+        strcpy(data[cari_index].nama,data[cari_index].nama);
+      }else {
+        printf("Invalid Input");
+      }
+    }else if(input == 'q' || input == 'Q'){
+    }else{
+      printf("Invalid Input!!\n");
+    }
+}
+
+//delete
+void hapus(struct dir data[], int cari_index){
+  char input;
+  printf("Apakah anda yakin ingin mengahpus berkas? (y/n)");
+  fflush(stdin);
+  scanf("%c",&input);
+  if(input == 'y' || input == 'Y'){
+    data[cari_index].status = 0;
+  }else if(input == 'n' || input == 'N'){
+    data[cari_index].status = 0;
+  }else {
+    printf("Invalid Input");
+  }
+  
+}
+
 //view all
 void view_all(struct dir data[]){
   int i;
   for(i=0;i<index_data;i++){
-    printf("%d. %s",(i+1),data[i].nama);
-    switch(data[i].ekstensi){
-      case 1:
-        printf(".docx");
-        break;
-      case 2:
-        printf(".xlsx");
-        break;
-      case 3:
-        printf(".mp3");
-        break;
-      case 4:
-        printf(".mp4");
-        break;
-      case 5:
-        printf(".pdf");
-        break;
-      default:
-        printf("Invalid Input");
-        break;    
+    if(data[i].status != 0){
+      printf("%d. %s",(i+1),data[i].nama);
+      switch(data[i].ekstensi){
+        case 1:
+          printf(".docx");
+          break;
+        case 2:
+          printf(".xlsx");
+          break;
+        case 3:
+          printf(".mp3");
+          break;
+        case 4:
+          printf(".mp4");
+          break;
+        case 5:
+          printf(".pdf");
+          break;
+        default:
+          printf("Invalid Input");
+          break;    
+      }
+      printf(" (id : %d)\n",data[i].id);
+      switch(data[i].jenis){
+        case 1:
+          printf("\tWord File\n");
+          break;
+        case 2:
+          printf("\tExcel File\n");
+          break;
+        case 3:
+          printf("\tMusic File\n");
+          break;
+        case 4:
+          printf("\tVideo File\n");
+          break;
+        case 5:
+          printf("\tPDF File\n");
+          break;
+        default:
+          printf("Invalid Input");
+          break;    
+      }
+      printf("\tLast Modified : %d-%d-%d",data[i].tanggal.tanggal,data[i].tanggal.bulan,data[i].tanggal.tahun);
+      printf(" By %s",data[i].owner);
+      printf("\n");
     }
-    printf(" (id : %d)\n",data[i].id);
-    switch(data[i].jenis){
-      case 1:
-        printf("\tWord File\n");
-        break;
-      case 2:
-        printf("\tExcel File\n");
-        break;
-      case 3:
-        printf("\tMusic File\n");
-        break;
-      case 4:
-        printf("\tVideo File\n");
-        break;
-      case 5:
-        printf("\tPDF File\n");
-        break;
-      default:
-        printf("Invalid Input");
-        break;    
-    }
-    printf("\tLast Modified : %d-%d-%d",data[i].tanggal.tanggal,data[i].tanggal.bulan,data[i].tanggal.tahun);
-    printf(" By %s",data[i].owner);
-    printf("\n");
   }
   getch();
 }
@@ -285,7 +387,7 @@ void view(struct dir data){
 
 //main menu
 void menu(struct dir data[], int n){
-  int cariInt,cari_index,pil,pil1;
+  int cariInt,cari_index,pil,pil1,ubah;
   char cariChar[128];
   char input;
   int loop_menu=1;
@@ -298,15 +400,16 @@ void menu(struct dir data[], int n){
     printf("\t\t      |  2. View All Files in directory (sorted ID by default) |\n");
     printf("\t\t\t    |  3. Search file in Directory                           |\n");
     printf("\t\t\t    |  4. Sort file in Directory                             |\n");
+    printf("\t\t\t    |  5. Change file in Directory                           |\n");
     printf("\t\t\t    | \t\tPress 'q' to Exit        |\n");
     printf("\t\t\t    |________________________________________________________|\n");
     fflush(stdin);
     printf("\t\t\t    |  Input Here : ");scanf("%c",&input);printf("                             |\n");
   
     //switch-case
-    if(input == '1'){
+    if(input == '1'){     //insert
       insert(n,data);
-  }else if(input == '2'){
+  }else if(input == '2'){   //view-all
     if(index_data == 0){
       printf("data masih kosong !!");
       getch();
@@ -314,7 +417,7 @@ void menu(struct dir data[], int n){
       bubbleSort_id(data,n,pil1);
       view_all(data);
     }
-  }else if(input == '3'){
+  }else if(input == '3'){   //search data
     if(index_data == 0){
       printf("data masih kosong !!");
       getch();
@@ -329,8 +432,9 @@ void menu(struct dir data[], int n){
           fflush(stdin);
           cari_index = jumpSearch_int(n,cariInt,data);
           printf("%d\n",cari_index);
-          if(cari_index != -1){
+          if(cari_index != -1 && data[cari_index].status != 0){
             view(data[cari_index]);
+            getch();
           }else{
             printf("data tidak ada !!\n");
           }
@@ -343,7 +447,7 @@ void menu(struct dir data[], int n){
           scanf("%[^\n]",&cariChar);
           cari_index = jumpSearch_char(n,cariChar,data);
           printf("%d\n",cari_index);
-                    if(cari_index != -1){
+          if(cari_index != -1 && data[cari_index].status != 0){
             view(data[cari_index]);
           }else{
             printf("data tidak ada !!\n");
@@ -352,11 +456,11 @@ void menu(struct dir data[], int n){
           break;
         default:
           printf("Invalid Input!!\n");
+          getch();
           break;
       }
-        
     }
-  }else if(input == '4'){
+  }else if(input == '4'){     //sort data
     if(index_data == 0){
       printf("data masih kosong!!\n");
       getch();
@@ -394,6 +498,31 @@ void menu(struct dir data[], int n){
             break;
         }
     }
+  }else if(input == '5'){
+    bubbleSort_nama(data,n,1);
+    printf("masukkan data yang ingin dicari : ");
+    fflush(stdin);
+    scanf("%[^\n]",&cariChar);
+    cari_index = jumpSearch_char(n,cariChar,data);
+    if(cari_index != -1 && data[cari_index].status != 0){
+      view(data[cari_index]);
+      printf("Mau Hapus atau ubah? (1 / 2)");
+      scanf("%d",&ubah);
+      switch(ubah){
+        case 1:
+          hapus(data,cari_index);
+          break;
+        case 2:
+          update(data,cari_index);
+          break;
+        default:
+          printf("Invalid Input!!\n");
+          break;
+      }
+    }else{
+      printf("data tidak ada !!\n");
+    }
+    getch();
   }else if(input == 'q'){
     trims();
     loop_menu=0;
