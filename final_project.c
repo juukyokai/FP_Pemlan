@@ -188,6 +188,10 @@ void insert(int n, struct dir data[n]){
 //view all
 void view_all(struct dir data[]){
   int i;
+  printf(" _____________________\n");
+  printf("|                     |\n");
+  printf("|     DAFTAR FILE     |\n");
+  printf("|_____________________|\n");
   for(i=0;i<index_data;i++){
     printf("%d. %s",(i+1),data[i].nama);
     switch(data[i].ekstensi){
@@ -210,7 +214,7 @@ void view_all(struct dir data[]){
         printf("Invalid Input");
         break;    
     }
-    printf(" (id : %d)\n",data[i].id);
+    printf(" (ID : %d)\n",data[i].id);
     switch(data[i].jenis){
       case 1:
         printf("\tWord File\n");
@@ -261,7 +265,7 @@ void view(struct dir data){
         printf("Invalid Input");
         break;    
     }
-    printf(" (id : %d)\n",data.id);
+    printf(" (ID : %d)\n",data.id);
     switch(data.jenis){
       case 1:
         printf("\tWord File\n");
@@ -641,7 +645,6 @@ int jumpSearch_char(int n, char x[], struct dir arr[]) {
   }
     return -1; 
 }
-
 
 
 /*fungsi tambahan*/
