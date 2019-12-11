@@ -10,7 +10,7 @@ int index_data = 0;
 
 
 //#include <bits/stdc++.h>
-//using namespace std; 
+//using namespace std;
 struct tanggal{
   int tanggal;
   int bulan;
@@ -119,24 +119,24 @@ void insert(int n, struct dir data[n]){
      //Setting ID
    temp_id = index_data+1;
      //input nama
-     printf("masukkan nama file : \n");
-     printf("Input : ");
+     printf(" Masukkan Nama file : \n");
+     printf(" Input : ");
      fflush(stdin);
    scanf("%[^\n]",&temp_nama);
      //input jenis
-     printf("masukkan Jenis file : \n");
-     printf("\t1. Word\n");
-     printf("\t2. Excel\n");
-     printf("\t3. Music\n");
-     printf("\t4. Video\n");
-     printf("\t5. PDF\n");
+     printf(" Masukkan Jenis file : \n");
+     printf(" \t1. Word\n");
+     printf(" \t2. Excel\n");
+     printf(" \t3. Music\n");
+     printf(" \t4. Video\n");
+     printf(" \t5. PDF\n");
    fflush(stdin);
-     printf("Input : ");
+     printf(" Input : ");
    scanf("%d",&temp_jenis);
      temp_eksten = temp_jenis;
      //printf("%d %d \n",temp_jenis,temp_eksten);
      //input owner
-     printf("masukkan owner file : ");
+     printf(" Masukkan owner file : ");
      fflush(stdin);
      scanf("%[^\n]",&temp_owner);  
     }
@@ -293,12 +293,12 @@ void menu(struct dir data[], int n){
     system("cls");
     //output memory
   printf("\n\n\n\n\t\t\t     ________________________________________________________\n");
-    printf("\t\t      |     Directory Management                 |\n");
-    printf("\t\t      |  1. Make New Directory                               |\n");
-    printf("\t\t      |  2. View All Files in directory (sorted ID by default) |\n");
+    printf("\t\t\t    |     Directory Management                               |\n");
+    printf("\t\t\t    |  1. Make New Directory                                 |\n");
+    printf("\t\t\t    |  2. View All Files in directory (sorted ID by default) |\n");
     printf("\t\t\t    |  3. Search file in Directory                           |\n");
     printf("\t\t\t    |  4. Sort file in Directory                             |\n");
-    printf("\t\t\t    | \t\tPress 'q' to Exit        |\n");
+    printf("\t\t\t    | \t\t\tPress 'q' to Exit                    |\n");
     printf("\t\t\t    |________________________________________________________|\n");
     fflush(stdin);
     printf("\t\t\t    |  Input Here : ");scanf("%c",&input);printf("                             |\n");
@@ -308,7 +308,7 @@ void menu(struct dir data[], int n){
       insert(n,data);
   }else if(input == '2'){
     if(index_data == 0){
-      printf("data masih kosong !!");
+      printf(" Data masih kosong !!");
       getch();
     }else {
       bubbleSort_id(data,n,pil1);
@@ -316,15 +316,15 @@ void menu(struct dir data[], int n){
     }
   }else if(input == '3'){
     if(index_data == 0){
-      printf("data masih kosong !!");
+      printf(" Data masih kosong !!");
       getch();
     }else {
-      printf("Mau cari berdasarkan ID atau nama? (1 / 2)\n");
+      printf(" Mau cari berdasarkan ID atau nama? (1 / 2)\n");
       scanf("%d",&pil);
       switch(pil){
         case 1:
           bubbleSort_id(data,n,1);
-          printf("masukkan data yang ingin dicari : ");
+          printf(" Masukkan data yang ingin dicari : ");
           scanf("%d",&cariInt);
           fflush(stdin);
           cari_index = jumpSearch_int(n,cariInt,data);
@@ -332,13 +332,13 @@ void menu(struct dir data[], int n){
           if(cari_index != -1){
             view(data[cari_index]);
           }else{
-            printf("data tidak ada !!\n");
+            printf(" Data tidak ada !!\n");
           }
           getch();
           break;
         case 2:
           bubbleSort_nama(data,n,1);
-          printf("masukkan data yang ingin dicari : ");
+          printf(" Masukkan data yang ingin dicari : ");
           fflush(stdin);
           scanf("%[^\n]",&cariChar);
           cari_index = jumpSearch_char(n,cariChar,data);
@@ -346,7 +346,7 @@ void menu(struct dir data[], int n){
                     if(cari_index != -1){
             view(data[cari_index]);
           }else{
-            printf("data tidak ada !!\n");
+            printf(" Data tidak ada !!\n");
           }
           getch();
           break;
@@ -358,13 +358,13 @@ void menu(struct dir data[], int n){
     }
   }else if(input == '4'){
     if(index_data == 0){
-      printf("data masih kosong!!\n");
+      printf(" Data masih kosong!!\n");
       getch();
     }else {
-      printf("Mau sort berdasarkan apa? \t\n1. ID\t\n2. Nama\t\n3. Jenis/Ekstensi\t\n4. Terakhir Dibuat\t\n5. Owner berkas)\n");
+      printf(" Mau sort berdasarkan apa? \t\n1. ID\t\n2. Nama\t\n3. Jenis/Ekstensi\t\n4. Terakhir Dibuat\t\n5. Owner berkas)\n");
       scanf("%d",&pil);
       fflush(stdin);
-      printf("Mau ascending apa descending? (1 / 2)\n");
+      printf(" Mau ascending apa descending? (1 / 2)\n");
       scanf("%d",&pil1);
       fflush(stdin);
         //pilih jenis sort
@@ -398,7 +398,7 @@ void menu(struct dir data[], int n){
     trims();
     loop_menu=0;
   }else{
-    printf("input tidak valid");
+    printf("Input tidak valid");
   }
   }
 }
@@ -612,7 +612,7 @@ int jumpSearch_char(int n, char x[], struct dir arr[]) {
     int step = sqrt(index_data) ;
       
     // Finding the block where element is 
-    // present (if it is present) 
+    // present (if it is present)
     int prev = 0; 
     while (strcmp(arr[min(step, index_data)-1].nama,x) < 0){ 
             prev = step; 
@@ -646,6 +646,7 @@ void trims(){
 }
 
 int main(int argc, char *argv[]){
+  system("color 79");
   int i,j,k;    //loop bases
   int n=10;
   struct dir data[n];
