@@ -119,17 +119,21 @@ void insert(int n, struct dir data[n]){
      //Setting ID
    temp_id = index_data+1;
      //input nama
-     printf(" Masukkan Nama file : \n");
+     printf(" ______________________\n");
+     printf("| Masukkan Nama file : |\n");
+     printf("|______________________|\n");
      printf(" Input : ");
      fflush(stdin);
    scanf("%[^\n]",&temp_nama);
      //input jenis
-     printf(" Masukkan Jenis file : \n");
-     printf(" \t1. Word\n");
-     printf(" \t2. Excel\n");
-     printf(" \t3. Music\n");
-     printf(" \t4. Video\n");
-     printf(" \t5. PDF\n");
+     printf(" _______________________\n");
+     printf("| Masukkan Jenis file : |\n");
+     printf("| \t1. Word         |\n");
+     printf("| \t2. Excel        |\n");
+     printf("| \t3. Music        |\n");
+     printf("| \t4. Video        |\n");
+     printf("| \t5. PDF          |\n");
+     printf("|_______________________|\n");
    fflush(stdin);
      printf(" Input : ");
    scanf("%d",&temp_jenis);
@@ -301,7 +305,8 @@ void menu(struct dir data[], int n){
     printf("\t\t\t    | \t\t\tPress 'q' to Exit                    |\n");
     printf("\t\t\t    |________________________________________________________|\n");
     fflush(stdin);
-    printf("\t\t\t    |  Input Here : ");scanf("%c",&input);printf("                             |\n");
+    printf("\t\t\t    |  Input Here : ");scanf("%c",&input);
+	printf("                             |\n");
   
     //switch-case
     if(input == '1'){
@@ -642,7 +647,10 @@ int jumpSearch_char(int n, char x[], struct dir arr[]) {
 /*fungsi tambahan*/
 void trims(){
   system("cls");
-  printf("Makasih !!");
+  printf(" ___________________________\n");
+  printf("|                           |\n");
+  printf("|\tTerimakasih !!      |\n");
+  printf("|___________________________|\n");
 }
 
 int main(int argc, char *argv[]){
