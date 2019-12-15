@@ -1,4 +1,4 @@
-#FP_Pemlan
+# FP_Pemlan
 
 <h1>Laporan Final Project Pemrograman Lanjut</h1>
 
@@ -13,7 +13,15 @@
 	<li>Dapat menuliskan source code yang efisien.</li>
 	<li>Dapat membuat program yang memiliki error handling.</li>
 	<li>Dapat membuat program yang memiliki lebih fungsional.</li>
-
+	
+<h2>Penjelasan Singkat</h2>
+<p>
+* <strong><i>bubble sort</i></strong><br>
+	Algoritma Bubble Sort merupakan proses pengurutan yang secara berangsur-angsur memindahkan data ke posisi yang tepat. Karena itulah, algoritma ini dinamakan “bubble” atau yang jika diterjemahkan ke dalam Bahasa Indonesia, artinya yaitu gelembung. Fungsi algoritma ini adalah untuk mengurutkan data dari yang terkecil ke yang terbesar (ascending) atau sebaliknya (descending).<br>
+<br>
+* <strong><i>Jump search</i></strong><br>
+	<i>Jump search</i> adalah metode pencarian suatu data atau elemen di dalam suatu array dengan kondisi data dalam keadaan terurut. Logika pencariannya hampir mirip dengan binary search hanya saja lingkup perbandingan langkahnya binary search menggunakan n/2 sedangkan jump search menggunakan <strong>√(n)</strong><br>
+</p>
 <h2>Kesimpulan</h2>
 <p>
 	Dari penjelasan diatas dapat kami simpulkan bahwa final project yang kami kerjakan mengikuti kaidah pemrograman bahasa C dengan mengimplementasikan metode CRUD (Create, Read, Update, Delete) dengan tambahan searching berupa jump search dan sorting berupa bubble sort, selain itu didalam program ini mengutamakan user friendly system dan error handling. Hal tersebut dilakukan agar mempermudah pengguna program dalam mengakses berbagai fitur yang telah kami sediakan. Sekian laporan yang dapat kami sampaikan terkait final project mata kuliah pemrograman lanjut dengan judul “Aplikasi Direktori (Folder)”. Dengan minimnya pengetahuan yang kami miliki dalam pembuatan laporan ini, sehingga kami mohon arahan untuk saran dan kesannya agar laporan ini dapat menjadi lebih baik lagi. Terima kasih.
